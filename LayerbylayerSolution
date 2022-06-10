@@ -1,0 +1,41 @@
+class Solution {
+    public int[][] generateMatrix(int n) {
+        int[][] ans = new int[n][n];
+        int loop = n / 2, mid = n / 2, curNum = 1;
+        int i = 0, j = 0, startx = 0, starty = 0;
+        
+        while (loop > 0) {
+            i = startx;
+            j = starty;
+            
+            //left to right
+            for (; j <= n - 2 - i; j++) {
+                ans[i][j] = curNum++;
+            }
+            
+            //upper to down
+            for (; i <= j - 1; i++) {
+                ans[i][j] = curNum++;
+            }
+            
+            //right to left
+            for (; j >= n - i; j--) {
+                ans[i][j] = curNum++;
+            }
+            
+            //down to upper
+            for (; i >= j + 1; i--) {
+                ans[i][j] = curNum++;
+            }
+            
+            startx++;
+            starty++;
+            loop--;
+        }
+        
+        if(n % 2 == 1) {
+            ans[mid][mid] = curNum;
+        }
+        return ans;
+    }
+}
